@@ -1,9 +1,12 @@
 import connectDB from '../DB/ConnectDb.js';
 import CategoriesRouter from './modules/Category/Category.router.js';
 import ProductRouter from './modules/Product/Product.router.js';
+import cors from 'cors';
+
 
 const Appinit = (app,express)=>{
     app.use(express.json());
+    app.use(cors())
     connectDB();
     app.use('/categories',CategoriesRouter);
     app.use('/product',ProductRouter);
