@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model ,Types} from 'mongoose';
 
 const CategorySchema = new Schema({
     Name:{
@@ -19,8 +19,8 @@ const CategorySchema = new Schema({
         enum:['Active','NotActive'],
      },
      
-     createdBy:{type:Types.Object,ref:'User',required:true},
-     updatedBy:{type:Types.Object,ref:'User',required:true},
+     createdBy:{type:Types.ObjectId,ref:'User',required:true},
+     updatedBy:{type:Types.ObjectId,ref:'User',required:true},
     },
     {
      timestamps:true,

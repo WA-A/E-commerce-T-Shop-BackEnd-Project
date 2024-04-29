@@ -1,9 +1,12 @@
 import { Router } from "express";
 const router = Router({caseSensitive:true});
+import * as CategoryController from './Category.controller.js'
+import fileUpload, { FileValue } from "../../../utls/Multer.js";
 
-router.get('/',(req,res)=>{
-    return res.json({message:"sucesss"})
-})
+
+router.post('/createcategory',fileUpload(FileValue.image).single('image'),CategoryController.CreateCategory);
+
+
 
 
 
