@@ -9,7 +9,7 @@ router.get('/getAll',CategoryController.GetAll);
 router.get('/getActive',CategoryController.GetActive);
 router.get('/getdetails/:id',CategoryController.GetDetails);
 router.patch('/updatecategory/:id',fileUpload(FileValue.image).single('image'),CategoryController.UpdateCategories);
-router.delete('/deletecategory/:id',fileUpload(FileValue.image).single('image'),CategoryController.DeleteCategories);
+router.delete('/deletecategory/:id',CategoryController.DeleteCategories);
 
 
 
