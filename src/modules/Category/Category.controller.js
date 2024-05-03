@@ -37,3 +37,37 @@ export const GetDetails = async (req,res) =>{
     const categories = await CategoryModel.findById(req.params.id);
     return res.status(200).json({message:"success",categories});
 }
+
+export const UpdateCategories = async (req,res) =>{
+    const category = await CategoryModel.findById(req.params.id);
+
+if(!category){
+    return res.status(200).json({message:"category not found"});
+
+}
+
+req.body.Name = req.body.Name.toLowerCase();
+
+if(await CategoryModel.findOne({Name:req.body.Name,_id:{$ne:req.params.id}})){
+    return res.status(409).json({message:"Name aleardy exists"});
+}
+
+category.Slug = slugify(req.body.Name);
+
+if(req.file){
+    const {secure_url,public_id} = await Cloudinary.uploader.upload(req.file.path,
+        {
+            folder:'T-Shop'
+        });
+
+        Cloudinary.uploader.destroy(category.image.public_id);
+        category.image = {secure_url,public_id};
+    
+}
+
+category.Status = req.body.Status;
+await category.save();
+return res.status(200).json({message:"success",category});
+
+
+}

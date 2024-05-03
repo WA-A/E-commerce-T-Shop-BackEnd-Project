@@ -8,6 +8,8 @@ router.post('/createcategory',fileUpload(FileValue.image).single('image'),Catego
 router.get('/getAll',CategoryController.GetAll);
 router.get('/getActive',CategoryController.GetActive);
 router.get('/getdetails/:id',CategoryController.GetDetails);
+router.patch('/updatecategory/:id',fileUpload(FileValue.image).single('image'),CategoryController.UpdateCategories);
+
 
 
 
