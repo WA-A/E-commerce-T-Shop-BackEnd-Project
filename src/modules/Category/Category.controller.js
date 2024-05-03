@@ -42,7 +42,7 @@ export const UpdateCategories = async (req,res) =>{
     const category = await CategoryModel.findById(req.params.id);
 
 if(!category){
-    return res.status(200).json({message:"category not found"});
+    return res.status(404).json({message:"category not found"});
 
 }
 
@@ -66,8 +66,21 @@ if(req.file){
 }
 
 category.Status = req.body.Status;
-await category.save();
+await category.save(); // to update in DB
 return res.status(200).json({message:"success",category});
 
 
+}
+
+export const DeleteCategories = async (req,res)=>{
+    const category = await CategoryModel.findByIdAndDelete(req.params.id);
+
+    if(!category){
+        return res.status(404).json({message:"category not found"});
+    
+    }
+
+    await Cloudinary.uploader.destroy(category.image.public_id);
+    return res.status(200).json({message:"success",category});
+  
 }
