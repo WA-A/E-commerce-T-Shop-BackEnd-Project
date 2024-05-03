@@ -19,8 +19,8 @@ const CategorySchema = new Schema({
         enum:['Active','NotActive'],
      },
      
-     createdBy:{type:Types.ObjectId,ref:'User',required:true},
-     updatedBy:{type:Types.ObjectId,ref:'User',required:true},
+     createdBy:{type:Types.ObjectId,ref:'User'},
+     updatedBy:{type:Types.ObjectId,ref:'User'},
     },
     {
      timestamps:true,
