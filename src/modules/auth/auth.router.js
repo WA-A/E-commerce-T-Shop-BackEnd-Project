@@ -4,8 +4,9 @@ import * as AuthController from './auth.controller.js'
 
 
 
+router.post('/signup',AuthController.SignUp);
 router.post('/signin',AuthController.SignIn);
-//router.get('/getAll',CategoryController.GetAll);
+
 
 
 
