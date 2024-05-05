@@ -1,4 +1,4 @@
-import connectDB from '../DB/ConnectDb.js';
+import connectDB from '../DB/ConnectDB.js';
 import CategoriesRouter from './modules/Category/Category.router.js';
 import ProductRouter from './modules/Product/Product.router.js';
 import AuthRouter from './modules/auth/auth.router.js';
