@@ -1,7 +1,8 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 const UserSchema = new Schema({
     UserName:{
+      type: String,
        required:true,
        min:4,
        max:20
@@ -10,14 +11,13 @@ const UserSchema = new Schema({
         type:String,
         unique:true
      },
-     
      Password:{
         type:String,
         required:true
      },
      Phone:{
       type:String
-  },
+     },
   Address:{
     type:String
     },
@@ -28,7 +28,6 @@ const UserSchema = new Schema({
      gender:{
         type:String,
         enum:['Male','Female'],
-       
      },
      image:{
       type:Object
