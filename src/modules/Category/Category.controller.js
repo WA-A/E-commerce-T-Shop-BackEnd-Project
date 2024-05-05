@@ -19,6 +19,9 @@ export const CreateCategory = async (req,res)=>{
     });
     
     req.body.image = {secure_url,public_id}
+
+    req.body.createdBy = req.user._id;
+    req.body.updatedBy = req.user._id;
     const Category =  await CategoryModel.create(req.body);
     return res.json({message:Category});
 }
@@ -66,6 +69,7 @@ if(req.file){
 }
 
 category.Status = req.body.Status;
+category.updatedBy = req.user._id;
 await category.save(); // to update in DB
 return res.status(200).json({message:"success",category});
 
