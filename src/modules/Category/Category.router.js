@@ -3,9 +3,10 @@ const router = Router({caseSensitive:true});
 import * as CategoryController from './Category.controller.js'
 import fileUpload, { FileValue } from "../../../utls/Multer.js";
 import { auth } from "../../MiddleWare/auth.js";
+import SubCategoriesRouter from './../SubCategory/SubCategory.router.js';
 
 
-
+router.use('/:id/subcategory',SubCategoriesRouter);
 router.post('/createcategory',auth(),fileUpload(FileValue.image).single('image'),CategoryController.CreateCategory);
 router.get('/getAll',CategoryController.GetAll);
 router.get('/getActive',CategoryController.GetActive);
