@@ -35,8 +35,10 @@ export const CreateCategory = async (req,res)=>{
 }
 
 export const GetAll = async (req,res) =>{
-    const categories = await CategoryModel.find({});
-    return res.status(200).json({message:"success",categories});
+
+    const {id} = req.params;
+    const subcategories = await SubCategoryModel.find({CategoryId:id});
+    return res.status(200).json({message:"success",subcategories});
 }
 
 export const GetActive = async (req,res) =>{

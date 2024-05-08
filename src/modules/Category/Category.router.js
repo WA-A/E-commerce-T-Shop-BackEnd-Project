@@ -1,5 +1,5 @@
 import { Router } from "express";
-const router = Router({caseSensitive:true});
+const router = Router();
 import * as CategoryController from './Category.controller.js'
 import fileUpload, { FileValue } from "../../../utls/Multer.js";
 import { auth } from "../../MiddleWare/auth.js";

@@ -24,9 +24,16 @@ const CategorySchema = new Schema({
     },
     {
      timestamps:true,
-    }  
-);
+     toJSON:{virtuals:true},
+     toObject:{virtuals:true}
+    });
  
+CategorySchema.virtual("SubCategory",{
+    localField:'_id',
+    foreignField:'CategoryId',
+    ref:'SubCategory'
+})
+
 
 const CategoryModel = model('Category',CategorySchema); // no relation in mongodb [ no sql]
 export default CategoryModel;

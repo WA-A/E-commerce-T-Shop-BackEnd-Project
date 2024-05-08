@@ -27,7 +27,20 @@ export const CreateCategory = async (req,res)=>{
 }
 
 export const GetAll = async (req,res) =>{
-    const categories = await CategoryModel.find({});
+    const categories = await CategoryModel.find({}).populate([{
+        path:"createdBy",
+        select:"UserName"
+    },
+
+{
+    path:"updatedBy",
+    select:"UserName"
+},
+
+{
+    path:"SubCategory",
+},
+]);
     return res.status(200).json({message:"success",categories});
 }
 
