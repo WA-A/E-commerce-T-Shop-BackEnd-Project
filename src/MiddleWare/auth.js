@@ -1,8 +1,12 @@
 import jwt from 'jsonwebtoken';
 import UserModel from './../Model/User.Model.js';
 
+export const Roles = { // --> array تحتوي من له صلاحية للاستخدام
+    Admin:'Admin',
+    User:'User'
+}
 
-export const auth = () =>{
+export const auth = (AccessRole = []) =>{
 
     return async (req,res,next)=>{
         const {authorization} = req.headers;
@@ -20,16 +24,19 @@ export const auth = () =>{
             return res.status(400).json({message:"Invalid authorization"});
         }
         
-        const authUser = await UserModel.findById(decoded.id).select('UserName');
+        const authUser = await UserModel.findById(decoded.id).select('UserName Role');
         
         if(!authUser){ 
             return res.status(404).json({message:" User Not found"});
         }
         
-        req.user=authUser;
+        if(!AccessRole.includes(authUser.Role)){ // authUser.Role --> صلاحية المستخدم الحالي
+            return res.status(403).json({message:" Not auth User"});
+
+        }
         
-        next();
-       
+        req.user=authUser;
+             next();
     }
 }
  
