@@ -18,7 +18,7 @@ export const SignUp = async (req,res)=>{
      
     const CreateUser = await UserModel.create({UserName,Email,Password:HashedPassword});
     
-    await SendEmail(Email,`Welcom`,`<h2>hello ${UserName}</h2>`)
+   // await SendEmail(Email,`Welcom`,`<h2>hello ${UserName}</h2>`)
     return res.status(201).json({message:" success",user:CreateUser});
 
 }
@@ -70,22 +70,22 @@ export const SendCode = async(req,res)=>{
 
 
      export const ForgotPassword = async(req,res)=>{
-        const {Email,Password,SendCode} = req.body;
+        const {Email,Password,code} = req.body;
         const user = await UserModel.findOne({Email});
         if(!user){
             return res.status(404).json({message:"user not found"});
 
         }
 
-        if(user.SendCode != SendCode){
+        if(user.SendCode != code){
             return res.status(404).json({message:"invalid code"});
         }
 
-        user.Password = bcrypt.hash(Password,parseInt(process.env.SALTROUND));
+        const password = bcrypt.hash(Password,parseInt(process.env.SALTROUND));
 
         await user.save();
 
-        return res.status(200).json({message:" success",user});
+        return res.status(200).json({message:" success"});
 
 
      }

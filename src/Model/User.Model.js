@@ -1,5 +1,4 @@
 import mongoose, { Schema, model } from 'mongoose';
-import { SendCode } from './../modules/auth/auth.controller';
 
 const UserSchema = new Schema({
     UserName:{
