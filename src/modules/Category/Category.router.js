@@ -16,7 +16,4 @@ router.patch('/updatecategory/:id',auth(),fileUpload(FileValue.image).single('im
 router.delete('/deletecategory/:id',auth(EndPoints.Delete),CategoryController.DeleteCategories);
 
 
-
-
-
 export default router
