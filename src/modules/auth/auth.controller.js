@@ -18,7 +18,7 @@ export const SignUp = async (req,res)=>{
      
     const CreateUser = await UserModel.create({UserName,Email,Password:HashedPassword});
     
-   // await SendEmail(Email,`Welcom`,`<h2>hello ${UserName}</h2>`)
+   //await SendEmail(Email,`Welcom`,`<h2>hello ${UserName}</h2>`)
     return res.status(201).json({message:" success",user:CreateUser});
 
 }
