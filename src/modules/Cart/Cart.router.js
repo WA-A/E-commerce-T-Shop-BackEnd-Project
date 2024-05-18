@@ -9,6 +9,7 @@ router.post('/createcart',auth(EndPoints.Create),CartController.CreateCart);
 router.delete('/removecart/:ProductId',auth(EndPoints.delete),CartController.RemoveCart);
 router.delete('/clearcart/:ProductId',auth(EndPoints.delete),CartController.ClearCart);
 router.get('/getcart',auth(EndPoints.Create),CartController.GetCart);
+router.put('/increasequantity/:ProductId',auth(EndPoints.Create),CartController.IncreaseQuantity);
 
 
 export default router
