@@ -34,10 +34,10 @@ const ProductSchema = new Schema({
       type:Object,
       required:true,
      },
-     SubImage:{
+     SubImage:[{
         type:Object,
         required:true,
-       },
+       }],
      Status:{
         type:String,
         default:'Active',
