@@ -10,6 +10,7 @@ router.delete('/removecart/:ProductId',auth(EndPoints.delete),CartController.Rem
 router.delete('/clearcart/:ProductId',auth(EndPoints.delete),CartController.ClearCart);
 router.get('/getcart',auth(EndPoints.Create),CartController.GetCart);
 router.put('/increasequantity/:ProductId',auth(EndPoints.Create),CartController.IncreaseQuantity);
+router.put('/decreasequantity/:ProductId',auth(EndPoints.Create),CartController.DecreaseQuantity);
 
 
 export default router

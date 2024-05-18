@@ -52,6 +52,24 @@ export const IncreaseQuantity = async (req,res)=>{
 return res.json({message:"success",cart});
 }
 
+export const DecreaseQuantity = async (req,res)=>{
+    const {Quantity} = req.body;
+ 
+    const cart = await CartModel.findByIdAndUpdate({UserId:req.user._id,
+     "Products:ProductId" : req.parmas.ProductId
+    },
+    {
+     $inc:{
+        
+         "Products.$.Quantity":-Quantity
+         
+     },
+    }
+     
+ ,{new:true});
+ 
+ return res.json({message:"success",cart});
+ }
 
 export const RemoveCart = async (req,res)=>{
     const {ProductId} = req.params;
