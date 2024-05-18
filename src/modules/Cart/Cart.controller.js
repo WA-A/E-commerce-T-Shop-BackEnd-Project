@@ -42,3 +42,18 @@ export const RemoveCart = async (req,res)=>{
     
 }
 
+
+export const ClearCart = async (req,res)=>{
+   
+
+    const cart = await CartModel.findByIdAndUpdate({UserId:req.user._id,
+        
+    },{
+        Products:[],
+    },{new:true});
+
+    return res.json({message:"success",cart});
+
+    
+}
+
