@@ -1,7 +1,7 @@
 import CartModel from './../../Model/Cart.Model.js';
 
 
-export const CreateCategory = async (req,res)=>{
+export const CreateCart = async (req,res)=>{
 const {ProductId} = req.body;
 
 const cart =  await CartModel.findOne({UserId:req.user._id});
@@ -24,5 +24,21 @@ const cart =  await CartModel.findOne({UserId:req.user._id});
    cart.Products.push({ProductId:ProductId});
    await cart.save();
     return res.json({message:"success",cart});
+}
+
+export const RemoveCart = async (req,res)=>{
+    const {ProductId} = req.params;
+
+    const cart = await CartModel.findByIdAndUpdate({UserId:req.user._id,
+        $pull:{
+            Products:{
+                ProductId:ProductId
+            }
+        }
+    },{new:true});
+
+    return res.json({message:"success",cart});
+
+    
 }
 
