@@ -8,6 +8,7 @@ import { EndPoints } from "./Cart.Role.js";
 router.post('/createcart',auth(EndPoints.Create),CartController.CreateCart);
 router.delete('/removecart/:ProductId',auth(EndPoints.delete),CartController.RemoveCart);
 router.delete('/clearcart/:ProductId',auth(EndPoints.delete),CartController.ClearCart);
+router.get('/getcart',auth(EndPoints.Create),CartController.GetCart);
 
 
 export default router

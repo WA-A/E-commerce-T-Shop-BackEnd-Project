@@ -26,6 +26,14 @@ const cart =  await CartModel.findOne({UserId:req.user._id});
     return res.json({message:"success",cart});
 }
 
+export const GetCart = async (req,res)=>{
+    const cart = await CartModel.findOne({UserId:req.user._id});
+
+    return res.json({message:"success",cart:cart.Products});  
+
+}
+
+
 export const RemoveCart = async (req,res)=>{
     const {ProductId} = req.params;
 
