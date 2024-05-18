@@ -11,6 +11,7 @@ router.delete('/clearcart/:ProductId',auth(EndPoints.delete),CartController.Clea
 router.get('/getcart',auth(EndPoints.Create),CartController.GetCart);
 router.put('/increasequantity/:ProductId',auth(EndPoints.Create),CartController.IncreaseQuantity);
 router.put('/decreasequantity/:ProductId',auth(EndPoints.Create),CartController.DecreaseQuantity);
+router.put('/updateequantity/:ProductId',auth(EndPoints.Create),CartController.UpdateQuantity);
 
 
 export default router
