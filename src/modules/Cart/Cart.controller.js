@@ -33,43 +33,44 @@ export const GetCart = async (req,res)=>{
 
 }
 
-export const IncreaseQuantity = async (req,res)=>{
-   const {Quantity} = req.body;
+// export const IncreaseQuantity = async (req,res)=>{
+//    const {Quantity} = req.body;
 
-   const cart = await CartModel.findByIdAndUpdate({UserId:req.user._id,
-    "Products:ProductId" : req.parmas.ProductId
-   },
-   {
-    $inc:{
+//    const cart = await CartModel.findByIdAndUpdate({UserId:req.user._id,
+//     "Products:ProductId" : req.parmas.ProductId
+//    },
+//    {
+//     $inc:{
        
-        "Products.$.Quantity":Quantity
+//         "Products.$.Quantity":Quantity
         
-    },
-   }
+//     },
+//    }
     
-,{new:true});
+// ,{new:true});
 
-return res.json({message:"success",cart});
-}
+// return res.json({message:"success",cart});
+// }
 
-export const DecreaseQuantity = async (req,res)=>{
-    const {Quantity} = req.body;
+
+// export const DecreaseQuantity = async (req,res)=>{
+//     const {Quantity} = req.body;
  
-    const cart = await CartModel.findByIdAndUpdate({UserId:req.user._id,
-     "Products:ProductId" : req.parmas.ProductId
-    },
-    {
-     $inc:{
+//     const cart = await CartModel.findByIdAndUpdate({UserId:req.user._id,
+//      "Products:ProductId" : req.parmas.ProductId
+//     },
+//     {
+//      $inc:{
         
-         "Products.$.Quantity":-Quantity
+//          "Products.$.Quantity":-Quantity
          
-     },
-    }
+//      },
+//     }
      
- ,{new:true});
+//  ,{new:true});
  
- return res.json({message:"success",cart});
- }
+//  return res.json({message:"success",cart});
+//  }
 
  export const UpdateQuantity = async (req,res)=>{
     const {Quantity ,Operator} = req.body;
