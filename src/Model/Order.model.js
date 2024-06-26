@@ -33,6 +33,9 @@ const OrderSchema = new Schema({
         enum:['Pending','Cancelled','Confirmed','Onway','Delivered'],
      },
      Products:[{
+      ProductName:{
+         type:String,
+      },
         ProductId:{ 
             type:Types.ObjectId,
             ref:'Product',
