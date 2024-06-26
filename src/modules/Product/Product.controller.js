@@ -14,13 +14,13 @@ export const CreateProduct = async (req,res) =>{
 
        
     if(!CheckCategory){
-        return res.status(404).json({message:"category not found"});
+        return res.status(404).json({message:"category not found!"});
     }
 
     const SubCheckCategory = await SubCategoryModel.findOne({_id:SubCategoryId,CategoryId:CategoryId});
        
     if(!SubCheckCategory){
-        return res.status(404).json({message:"subcategory not found"});
+        return res.status(404).json({message:"subcategory not found!"});
     }
 
     
@@ -37,15 +37,18 @@ export const CreateProduct = async (req,res) =>{
    // return res.json({secure_url,public_id});
     
     req.body.MainImage = {secure_url,public_id};
-    req.body.SubImage = [];
+    req.body.SubImages = []
 
-    for (const file of req.files.SubImage){
+    for (const file of req.files.SubImages){
         const {secure_url,public_id} = await Cloudinary.uploader.upload(file.path,
             {
-                folder:'T-Shop/Product/SubImage'
-            });
-            req.body.SubImage.push({secure_url,public_id}) ;
+                folder:'T-Shop/Product/SubImages'
+            })
+            req.body.SubImages.push({secure_url,public_id}) ;
     }
+
+    req.body.createdBy=req.user._id
+    req.body.updatedBy=req.user._id 
 
 
     const Product =  await ProductModel.create(req.body);

@@ -34,7 +34,7 @@ const ProductSchema = new Schema({
       type:Object,
       required:true,
      },
-     SubImage:[{
+     SubImages:[{
         type:Object,
         required:true,
        }],
