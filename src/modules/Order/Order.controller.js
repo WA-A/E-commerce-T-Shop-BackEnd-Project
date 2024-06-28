@@ -89,3 +89,25 @@ return res.json({message:'sucess',order});
 
 }
 
+
+export const GetOrder = async (req,res)=>{
+
+    const orders = await OrderModel.find({$or:[
+        {
+            status:'Pending ',
+        },
+        {
+            status:'Confirmed', 
+        }
+    ]});
+
+    return res.json({message:"sucess",orders});
+}
+
+export const GetUserOrder = async (req,res)=>{
+
+    const userorders = await OrderModel.find({UserId:req.user._id});
+
+    return res.json({message:"sucess",userorders});
+}
+

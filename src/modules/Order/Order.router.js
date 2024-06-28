@@ -6,6 +6,8 @@ import { EndPoints } from "./Order.Role.js";
 
 
 router.post('/createorder',auth(EndPoints.Create),OrderController.CreateOrder);
+router.get('/getorder',auth(EndPoints.all),OrderController.GetOrder);
+router.get('/getuserorder',auth(EndPoints.UserOrder),OrderController.GetUserOrder);
 
 
 
