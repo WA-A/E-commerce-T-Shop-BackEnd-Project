@@ -15,5 +15,5 @@ router.post('/createproduct',auth(EndPoints.Create),fileUpload(FileValue.image).
     {name:'SubImage',maxCount:5}
 ]),ProductController.CreateProduct);
 
-
+router.get("/getproducts",ProductController.GetProducts);
 export default router
