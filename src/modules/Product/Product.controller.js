@@ -76,7 +76,7 @@ export const GetProducts = async(req,res)=>{ // back filiter
     //     path: 'UserId',
     //     select:'UserNmae -_id'
     //    },
-    // },).select('name');    //?page =4            ?page=2&limit=5&name=wasan
+    // },);    //?page =4           // ?page=2&limit=5&name=wasan
 
    if(req.query.search){
     mongoseQuery.find({ 
