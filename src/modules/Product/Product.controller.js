@@ -62,7 +62,7 @@ export const GetProducts = async(req,res)=>{ // back filiter
 
     const {Skip,Limit} = Pagination(req.query.Page,req.query.Limit);
     let queryObj={...req.query};
-    const execQuery = ['Page','limit'];
+    const execQuery = ['Page','limit','sort','search'];
     execQuery.map( (ele)=>{
         delete queryObj[ele];
     });
@@ -78,7 +78,19 @@ export const GetProducts = async(req,res)=>{ // back filiter
     //    },
     // },).select('name');    //?page =4            ?page=2&limit=5&name=wasan
 
-const products = await mongoseQuery.sort(req.query.sort); //.select('Name Price Discount');
-    return res.status(200).json({message:"success",products});
+   if(req.query.search){
+    mongoseQuery.find({ 
+        $or:[
+            {name:{$regex:req.query.search}}, // search word from user 
+            {Discription:{$regex:req.query.search}},
+        ]
+    })
+   }
+
+ const count = await ProductModel.estimatedDocumentCount(); //count for page
+ //mongoseQuery.select(req.query.fields); 
+
+const products = await mongoseQuery.sort(req.query.sort);//.select('Name Price Discount');
+    return res.status(200).json({message:"success",products,count});
 
 }
