@@ -7,6 +7,7 @@ import CouponRouter from './modules/Coupon/Coupon.router.js';
 import AuthRouter from './modules/auth/auth.router.js';
 import CartRouter from './modules/Cart/Cart.router.js';
 import UserRouter from './modules/User/User.router.js';
+import ReviewRouter from './modules/Review/Review.router.js';
 
 import cors from 'cors';
 
@@ -22,6 +23,7 @@ const Appinit = (app,express)=>{
     app.use('/order',OrderRouter);
     app.use('/coupon',CouponRouter);
     app.use('/user',UserRouter);
+    app.use('/review',ReviewRouter);
     app.use('/auth',AuthRouter);
     
     app.use('*',(req,res)=>{
