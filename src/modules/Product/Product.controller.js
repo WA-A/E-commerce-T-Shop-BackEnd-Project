@@ -3,6 +3,9 @@ import SubCategoryModel from './../../Model/SubCategory.js';
 import ProductModel from './../../Model/Product.Model.js';
 import slugify from'slugify';
 import Cloudinary from '../../../utls/Cloudinary.js';
+import {Pagination} from '../../../utls/Pagination.js';
+//import {skip,limit} from 'mongoose';
+
 
 export const CreateProduct = async (req,res) =>{
 
@@ -56,14 +59,16 @@ export const CreateProduct = async (req,res) =>{
 }
 
 export const GetProducts = async(req,res)=>{
-    const product = await ProductModel.find({}).populate({
+
+    const {Skip,Limit} = Pagination(req.query.Page,req.query.Limit);
+    const product = await ProductModel.find({}).skip(Skip).limit(Limit).populate({
         path:"reviews",
        populate:{
         path: 'UserId',
-        select:'UserNmae - _id'
+        select:'UserNmae -_id'
        },
-    },
-);
+    },).select('name');    //?page =4            ?page=2&limit=5&name=wasan
+
 
     return res.status(201).json({message:"success",product});
 
