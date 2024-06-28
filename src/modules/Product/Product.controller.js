@@ -4,7 +4,7 @@ import ProductModel from './../../Model/Product.Model.js';
 import slugify from'slugify';
 import Cloudinary from '../../../utls/Cloudinary.js';
 import {Pagination} from '../../../utls/Pagination.js';
-//import {skip,limit} from 'mongoose';
+//import {select} from 'mongoose';
 
 
 export const CreateProduct = async (req,res) =>{
@@ -58,18 +58,27 @@ export const CreateProduct = async (req,res) =>{
     return res.status(201).json({message:"success",Product});
 }
 
-export const GetProducts = async(req,res)=>{
+export const GetProducts = async(req,res)=>{ // back filiter 
 
     const {Skip,Limit} = Pagination(req.query.Page,req.query.Limit);
-    const product = await ProductModel.find({}).skip(Skip).limit(Limit).populate({
-        path:"reviews",
-       populate:{
-        path: 'UserId',
-        select:'UserNmae -_id'
-       },
-    },).select('name');    //?page =4            ?page=2&limit=5&name=wasan
+    let queryObj={...req.query};
+    const execQuery = ['Page','limit'];
+    execQuery.map( (ele)=>{
+        delete queryObj[ele];
+    });
+    queryObj = JSON.stringify(queryObj);
+    queryObj=queryObj.replace(/gt|gta|lt|lte|in|nin|eq/g,match => `$${match}`);
+    queryObj= JSON.parse(queryObj);
+    const mongoseQuery = await ProductModel.find({queryObj}).skip(Skip).limit(Limit);
+    // .populate({
+    //     path:"reviews",
+    //    populate:{
+    //     path: 'UserId',
+    //     select:'UserNmae -_id'
+    //    },
+    // },).select('name');    //?page =4            ?page=2&limit=5&name=wasan
 
-
-    return res.status(201).json({message:"success",product});
+const products = await mongoseQuery.sort(req.query.sort); //.select('Name Price Discount');
+    return res.status(200).json({message:"success",products});
 
 }
