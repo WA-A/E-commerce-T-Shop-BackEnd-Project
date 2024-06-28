@@ -5,9 +5,9 @@ import { auth } from "../../MiddleWare/auth.js";
 import { EndPoints } from "./Review.Role.js";
 
 
+const router = Router({mergeParams:true});
 
-const router = Router();
-
+router.post('/createreview',auth(EndPoints.Create),ReviewController.CreateReview);
 
 
 

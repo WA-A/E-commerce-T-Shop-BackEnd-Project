@@ -13,8 +13,13 @@ const ReviewSchema = new Schema({
     },
     UserId:{
 type:Types.ObjectId,
-ref:'user',
+ref:'User',
 require:true,
+    },
+    ProductId:{
+        type:Types.ObjectId,
+        ref:'Product',
+        require:true, 
     },
      image:{
       type:Object,
