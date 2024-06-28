@@ -10,13 +10,13 @@ const CouponSchema = new Schema({
         type:Number,
        required:true,
      },
-     UsedBy:[{
-       UserId:{
+     UsedBy:[
+       {
         type:Types.ObjectId,
       ref:'User',
       required:true,
     },
-       }],
+       ],
 
        ExpireDate:{
         type:Date,

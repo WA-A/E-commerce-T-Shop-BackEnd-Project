@@ -111,3 +111,21 @@ export const GetUserOrder = async (req,res)=>{
     return res.json({message:"sucess",userorders});
 }
 
+export const ChangeStatus = async (req,res)=>{
+
+    const {OrderId}  = req.params
+    const {status}  = req.body;
+    const order = await OrderModel.findById(OrderId);
+
+    if(!order){
+        return res.json({message:"order not found"});
+
+    }
+
+     order.Status = status;
+     await order.save();
+
+     return res.json({message:"sucess",order});
+
+}
+

@@ -5,4 +5,5 @@ export const EndPoints = {
     Create : [Roles.User],
     all : [Roles.Admin],
     UserOrder:[Roles.User],
+    changestatus:[Roles.Admin],
 }
