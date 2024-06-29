@@ -10,6 +10,7 @@ router.post('/signup',CheckEmail,AuthController.SignUp);
 router.post('/signin',AuthController.SignIn);
 router.patch('/sendcode',AuthController.SendCode);
 router.patch('/forgotpassword',AuthController.ForgotPassword);
+router.get('/confirmemail/:token',AuthController.ConfirmEmail);
 
 
 

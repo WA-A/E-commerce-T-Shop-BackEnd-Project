@@ -6,17 +6,23 @@ import UserModel from '../../Model/User.Model.js';
 
 export const SignUp = async (req,res)=>{
     const {UserName,Email,Password} = req.body;
-    
+
     const HashedPassword = bcrypt.hashSync(Password,parseInt(process.env.SALTROUND));
      
     const CreateUser = await UserModel.create({UserName,Email,Password:HashedPassword});
-    
-   await SendEmail(Email,`Welcom`,`<h2>hello ${UserName}</h2>`)
+    const decoded = jwt.sign(token,process.env.CONFIRM_EMAILTOKEN);
+   await SendEmail(Email,`Welcom`,`<h2>hello ${UserName}</h2>`,decoded);
     return res.status(201).json({message:" success",user:CreateUser});
 
 }
 
+export const ConfirmEmail = async(req,res)=>{
+const token = req.params.token;
+const decoded = jwt.verify(token,process.env.CONFIRM_EMAILTOKEN);
+await UserModel.findOneAndUpdate({Email:decoded.Email},{ConfirmEmail:true});
+return res.status(200).json({message:"success"});
 
+}
 export const SignIn = async (req,res)=>{
     const {Email,Password} = req.body;
 
@@ -55,7 +61,7 @@ export const SendCode = async(req,res)=>{
         return res.status(400).json({message:" email not found"});
     }
     
-    //await SendEmail(Email,`Reset Password`,`<h2> code is ${code}</h2>`)
+    await SendEmail(Email,`Reset Password`,`<h2> code is ${code}</h2>`)
     
     return res.status(200).json({message:" success",user});
 
