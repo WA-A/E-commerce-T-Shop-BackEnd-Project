@@ -12,7 +12,9 @@ export const auth = (AccessRole = []) =>{
         const {authorization} = req.headers;
         
         if(!authorization.startsWith(process.env.BEARERKEY)){ // bearer token the before is named basic token
-            return res.json({message:"Invalid authorization"});
+            //return res.json({message:"Invalid token"});
+            return next(new Error (`Invalid token`,401));
+
         }
         
         
