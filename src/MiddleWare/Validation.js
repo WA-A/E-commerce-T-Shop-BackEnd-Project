@@ -2,7 +2,14 @@
 export const Validation = (schema)=>{
     const errorsMessage = [];
    return (req,res,next)=>{
-    const {error}= schema.validate({...req.body,...req.params,...req.query},{abortEarly:false});
+    
+    if(req.file){
+        fileData.image = req.file
+    }
+    
+    const {error}={...req.body,...req.params,...req.query};
+
+    
     if(error){
         error.details.forEach( err=>{
             const key = err.context.key;
