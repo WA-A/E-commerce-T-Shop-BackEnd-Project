@@ -3,8 +3,22 @@ import jwt from 'jsonwebtoken';
 import { SendEmail } from "../../../utls/SendEmail.js";
 import { customAlphabet, nanoid } from 'nanoid';
 import UserModel from '../../Model/User.Model.js';
+import joi from 'joi';
+
+const RegisterSchema = joi.object({
+    UserName: joi.string().alphanum().min(3).max(30).required(),
+    Password: joi.string().pattern(/^[A-Z][a-z0-9]{3,20}$/),
+    Email: joi.string().email().required(),
+    ConfirmPassword:joi.valid(joi.ref('Password')).required(),
+});
+
 
 export const SignUp = async (req,res)=>{
+   const {error}= RegisterSchema.validate(req.body,{abortEarly:false});
+   if(error){
+    return res.status(400).json({message:"validate error",error});
+   }
+   
     const {UserName,Email,Password} = req.body;
 
     const HashedPassword = bcrypt.hashSync(Password,parseInt(process.env.SALTROUND));
