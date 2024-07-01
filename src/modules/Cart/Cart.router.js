@@ -3,9 +3,10 @@ const router = Router();
 import * as CartController from './Cart.controller.js'
 import { auth } from "../../MiddleWare/auth.js";
 import { EndPoints } from "./Cart.Role.js";
+import { Validation } from "../../MiddleWare/Validation.js";
+import * as schema from './Cart.Validation.js'
 
-
-router.post('/createcart',auth(EndPoints.Create),CartController.CreateCart);
+router.post('/createcart',auth(EndPoints.Create),Validation(schema.CreateCartSchema),CartController.CreateCart);
 router.delete('/removecart/:ProductId',auth(EndPoints.delete),CartController.RemoveCart);
 router.delete('/clearcart/:ProductId',auth(EndPoints.delete),CartController.ClearCart);
 router.get('/getcart',auth(EndPoints.Create),CartController.GetCart);
