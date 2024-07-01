@@ -66,7 +66,7 @@ export const SendCode = async(req,res)=>{
         return res.status(400).json({message:" email not found"});
     }
     
-    await SendEmail(Email,`Reset Password`,`<h2> code is ${code}</h2>`)
+    //await SendEmail(Email,`Reset Password`,`<h2> code is ${code}</h2>`)
     
     return res.status(200).json({message:" success",user});
 

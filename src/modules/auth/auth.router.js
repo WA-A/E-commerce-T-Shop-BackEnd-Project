@@ -12,8 +12,8 @@ import * as schema from './Auth.Validation.js'
 
 router.post('/signup',Validation(schema.RegisterSchema),CheckEmail,AsyncHandler(AuthController.SignUp));
 router.post('/signin',Validation(schema.LoginSchema),AuthController.SignIn);
-router.patch('/sendcode',AuthController.SendCode);
-router.patch('/forgotpassword',AuthController.ForgotPassword);
+router.patch('/sendcode',Validation(schema.SendCodeSchema),AuthController.SendCode);
+router.patch('/forgotpassword',Validation(schema.ForgetPasswordSchema),AuthController.ForgotPassword);
 router.get('/confirmemail/:token',AuthController.ConfirmEmail);
 
 
