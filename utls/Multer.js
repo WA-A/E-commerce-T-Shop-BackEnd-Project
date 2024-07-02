@@ -3,7 +3,8 @@ import multer from 'multer';
 
 export const FileValue = {
     image: ['image/jpeg','image/png','image/webp'],
-    file:['application/pdf']
+    file:['application/pdf'],
+    excle:['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
 }
 
 function fileUpload(customValue = []){

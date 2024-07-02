@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import { SendEmail } from "../../../utls/SendEmail.js";
 import { customAlphabet, nanoid } from 'nanoid';
 import UserModel from '../../Model/User.Model.js';
-
+//import { read, writeFileXLSX } from "xlsx";
+import xlsx from "xlsx";
 
 
 
@@ -91,7 +92,18 @@ export const SendCode = async(req,res)=>{
 
         return res.status(200).json({message:" success"});
 
+         
+     }
 
+
+     export const AddUserExcel = async(req,res)=>{
+            const WorkBook = xlsx.readFile(req.file.path);
+            const worksheet= WorkBook.Sheet[WorkBook.SheetNames[0]];
+            const users= xlsx.utils.sheet_to_json(worksheet);
+
+            await UserModel.insertMany(users);
+
+            return res.json({message:"sucess"});
      }
     
   

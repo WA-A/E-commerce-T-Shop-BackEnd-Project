@@ -11,6 +11,10 @@ const UserSchema = new Schema({
         type:String,
         unique:true
      },
+     IsDeleted:{ // delete user and may retuen after delete
+type:Boolean,
+default:false,
+     },
      Password:{
         type:String,
         required:true
