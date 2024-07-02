@@ -1,7 +1,7 @@
 import fs from  "fs";
 import PDFDocument from  "pdfkit";
 
-export  function createInvoice(invoice, path) {
+export function createInvoice(invoice, path) {
   let doc = new PDFDocument({ size: "A4", margin: 50 });
 
   generateHeader(doc);
