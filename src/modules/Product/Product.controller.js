@@ -91,6 +91,12 @@ export const GetProducts = async(req,res)=>{ // back filiter
  //mongoseQuery.select(req.query.fields); 
 
 const products = await mongoseQuery.sort(req.query.sort);//.select('Name Price Discount');
+
     return res.status(200).json({message:"success",products,count});
 
 }
+
+
+
+// map of products session 17 
+// stripDocs for paypal session 17
